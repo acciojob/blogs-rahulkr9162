@@ -56,6 +56,7 @@ public class BlogService {
 
         //Updating the userInformation and changing its blogs
         userRepository1.save(user);
+       // blogRepository1.save(blog);
 
     }
 
