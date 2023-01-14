@@ -19,7 +19,7 @@ public class User{
 
     private String lastName;
 
-    @OneToMany(mappedBy = "user_Info", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Blog> blogList;
 
     public User() {

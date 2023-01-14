@@ -46,7 +46,7 @@ public class BlogService {
         blog.setTitle(title);
         blog.setContent(content);
         User user = userRepository1.findById(userId).get();
-        blog.setUser_Info(user);
+        blog.setUser(user);
 
         //updating the blog details
         List<Blog> currentlistofBlogs = user.getBlogList();
@@ -69,7 +69,7 @@ public class BlogService {
         image.setDescription(description);
         image.setDimensions(dimensions);
         Blog blog = findBlogById(blogId);
-        image.setBlog_Info(blog);
+        image.setBlog(blog);
 
         List<Image> imageList = blog.getImageList();
         imageList.add(image);

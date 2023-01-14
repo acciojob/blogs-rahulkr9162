@@ -16,15 +16,15 @@ public class Image {
 
     @ManyToOne
     @JoinColumn
-    private Blog blog_Info;
+    private Blog blog;
 
     public Image() {
     }
 
-    public Image(String description, String dimensions, Blog blog_Info) {
+    public Image(String description, String dimensions, Blog blog) {
         this.description = description;
         this.dimensions = dimensions;
-        this.blog_Info = blog_Info;
+        this.blog = blog;
     }
 
     public int getId() {
@@ -51,11 +51,11 @@ public class Image {
         this.dimensions = dimensions;
     }
 
-    public Blog getBlog_Info() {
-        return blog_Info;
+    public Blog getBlog() {
+        return blog;
     }
 
-    public void setBlog_Info(Blog blog_Info) {
-        this.blog_Info = blog_Info;
+    public void setBlog(Blog blog) {
+        this.blog = blog;
     }
 }
