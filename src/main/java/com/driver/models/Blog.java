@@ -72,6 +72,14 @@ public class Blog {
         return imageList;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setImageList(List<Image> imageList) {
         this.imageList = imageList;
     }
