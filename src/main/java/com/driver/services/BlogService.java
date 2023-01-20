@@ -19,6 +19,9 @@ public class BlogService {
     BlogRepository blogRepository1;
 
     @Autowired
+    ImageService imageService1;
+
+    @Autowired
     ImageRepository imageRepository1;
 
     @Autowired
@@ -26,18 +29,7 @@ public class BlogService {
 
     public List<Blog> showBlogs(){
         //find all blogs
-        List<Blog> blogs = new ArrayList<>();
-        List<List<Blog>> listofblogs = new ArrayList<>();
-        for(User user : userRepository1.findAll()){
-            List<Blog> bloglist = user.getBlogList();
-            listofblogs.add(bloglist);
-        }
-        for(List<Blog> x : listofblogs){
-            for(Blog y : x){
-                blogs.add(y);
-            }
-        }
-        return blogs;
+        return blogRepository1.findAll();
     }
 
     public void createAndReturnBlog(Integer userId, String title, String content) {
@@ -47,6 +39,7 @@ public class BlogService {
         blog.setContent(content);
         User user = userRepository1.findById(userId).get();
         blog.setUser(user);
+        blog.setPubDate(new Date());
 
         //updating the blog details
         List<Blog> currentlistofBlogs = user.getBlogList();
@@ -66,12 +59,8 @@ public class BlogService {
     }
 
     public void addImage(Integer blogId, String description, String dimensions){
-        Image image = new Image();
-        image.setDescription(description);
-        image.setDimensions(dimensions);
-        Blog blog = findBlogById(blogId);
-        image.setBlog(blog);
-
+        Blog blog = blogRepository1.findById(blogId).get();
+        Image image = imageService1.createAndReturn(blog,description,dimensions);
         List<Image> imageList = blog.getImageList();
         imageList.add(image);
         blog.setImageList(imageList);
@@ -82,6 +71,7 @@ public class BlogService {
 
     public void deleteBlog(int blogId){
         //delete blog and corresponding images
-        blogRepository1.deleteById(blogId);
+        Blog blog = blogRepository1.findById(blogId).get();
+        blogRepository1.delete(blog);
     }
 }

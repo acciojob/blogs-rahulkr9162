@@ -15,11 +15,10 @@ public class BlogController {
 
     @Autowired
     BlogService blogService;
-    @GetMapping
+    @GetMapping("/get")
     public ResponseEntity<Integer> getAllBlogs() {
-        int countOfBlogs = 0;
-        countOfBlogs = blogService.showBlogs().size();
-        return new ResponseEntity<>(countOfBlogs, HttpStatus.OK);
+        List<Blog> countOfBlogs = blogService.showBlogs();
+        return new ResponseEntity<>(countOfBlogs.size(), HttpStatus.OK);
     }
 
     @PostMapping("/create")
